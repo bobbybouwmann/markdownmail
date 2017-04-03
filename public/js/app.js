@@ -12343,8 +12343,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         colorSelected: function colorSelected(id, color) {
-            console.log(id, color);
-
             this.handleColorSelected(id, color);
         },
         fetchColors: function fetchColors() {

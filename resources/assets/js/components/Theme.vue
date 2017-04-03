@@ -38,8 +38,6 @@
 
         methods: {
             colorSelected(id, color) {
-                console.log(id, color);
-
                 this.handleColorSelected(id, color);
             },
 
