@@ -17,7 +17,7 @@ class ThemesController extends Controller
         $theme = auth()->user()->themes()->create([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
-            'colors' => '{}',
+            'colors' => [],
         ]);
 
         return redirect()->route('themes.edit', $theme->id);
