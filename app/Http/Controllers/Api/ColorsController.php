@@ -25,8 +25,14 @@ class ColorsController extends ApiController
      */
     public function patch(Request $request, Theme $theme, $identifier)
     {
+        $colors = $theme->colors;
+
+        if (!is_array($colors)) {
+            $colors = [];
+        }
+
         $theme->update([
-            'colors' => array_merge($theme->colors, [$identifier => $request->color]),
+            'colors' => array_merge($colors, [$identifier => $request->color]),
         ]);
 
         return $theme->colors;
