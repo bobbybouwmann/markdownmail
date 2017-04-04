@@ -5,7 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-left" style="padding-top: 10px;">Dashboard</h4>
+
+                    <a href="{{ route('themes.create') }}" class="btn btn-primary pull-right">New theme</a>
+                </div>
 
                 <div class="panel-body">
 
