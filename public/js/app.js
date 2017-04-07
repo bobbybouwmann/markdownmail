@@ -12201,6 +12201,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12229,12 +12238,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setColor: function setColor(color) {
             this.newColor = color;
 
-            this.pushColor();
+            if (this.theme) {
+                this.pushColor();
+            }
 
             this.$emit('color_selected', this.id, this.newColor);
         },
         pushColor: function pushColor() {
-            var url = '/api/theme/' + this.theme + '/colors/' + this.id;
+            var url = '/api/themes/' + this.theme + '/colors/' + this.id;
 
             axios.patch(url, {
                 id: this.id,
@@ -12279,7 +12290,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        this.generatePreview();
+        if (this.theme) {
+            this.generatePreview();
+        } else {
+            this.generateDefaultPreview();
+        }
     },
 
 
@@ -12287,10 +12302,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         generatePreview: function generatePreview() {
             var _this = this;
 
-            var url = '/api/theme/' + this.theme;
+            var url = '/api/themes/' + this.theme;
 
             axios.get(url).then(function (response) {
                 return _this.mail = response.data;
+            });
+        },
+        generateDefaultPreview: function generateDefaultPreview() {
+            var _this2 = this;
+
+            var url = '/api/themes/preview';
+
+            axios.get(url).then(function (response) {
+                return _this2.mail = response.data;
             });
         }
     }
@@ -12325,6 +12349,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12333,25 +12393,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            colors: []
+            colors: [],
+            css: null
         };
     },
     created: function created() {
-        this.fetchColors();
+        if (this.theme) {
+            this.fetchColors();
+        } else {
+            this.fetchDefaultColors();
+        }
     },
 
 
     methods: {
         colorSelected: function colorSelected(id, color) {
+            this.updateColorCollection(id, color);
+
             this.handleColorSelected(id, color);
         },
         fetchColors: function fetchColors() {
             var _this = this;
 
-            var url = '/api/theme/' + this.theme + '/colors';
+            var url = '/api/themes/' + this.theme + '/colors';
 
             axios.get(url).then(function (response) {
                 return _this.colors = response.data;
+            });
+        },
+        fetchDefaultColors: function fetchDefaultColors() {
+            var _this2 = this;
+
+            var url = '/api/themes/colors';
+
+            axios.get(url).then(function (response) {
+                return _this2.colors = response.data;
+            });
+        },
+        generateCss: function generateCss() {
+            if (this.theme) {
+                this.fetchCssForTheme();
+            } else {
+                this.fetchCssForColors();
+            }
+        },
+        fetchCssForTheme: function fetchCssForTheme() {
+            var _this3 = this;
+
+            var url = '/api/themes/' + this.theme + '/css';
+
+            axios.get(url).then(function (response) {
+                return _this3.css = response.data;
+            });
+        },
+        fetchCssForColors: function fetchCssForColors() {
+            var _this4 = this;
+
+            var url = '/api/themes/css-colors';
+
+            axios.get(url, {
+                params: {
+                    colors: this.colors
+                }
+            }).then(function (response) {
+                return _this4.css = response.data;
             });
         },
         updateColorCollection: function updateColorCollection(id, color) {
@@ -32154,7 +32259,27 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return _c('div', [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button",
+      "data-toggle": "modal",
+      "data-target": "#myModal"
+    },
+    on: {
+      "click": _vm.generateCss
+    }
+  }, [_vm._v("\n        Generate Laravel markdown theme\n    ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button",
+      "data-toggle": "modal",
+      "data-target": "#myModal"
+    },
+    on: {
+      "click": _vm.generateCss
+    }
+  }, [_vm._v("\n        Generate html\n    ")]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "colors-collection"
   }, [_c('div', {
     staticClass: "panel-group",
@@ -32174,8 +32299,70 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "color_selected": _vm.colorSelected
       }
     })
-  }))])])
-},staticRenderFns: []}
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "myModal",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "myModalLabel"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('h4', [_vm._v("How to use this theme in your Laravel applications")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('textarea', {
+    staticStyle: {
+      "width": "100%",
+      "height": "400px"
+    },
+    attrs: {
+      "disabled": "disabled"
+    }
+  }, [_vm._v(_vm._s(_vm.css))])]), _vm._v(" "), _vm._m(2)])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal",
+      "aria-label": "Close"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title",
+    attrs: {
+      "id": "myModalLabel"
+    }
+  }, [_vm._v("Laravel CSS theme")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ol', [_c('li', [_vm._v("Create a new themes file in \"resources/views/vendor/mail/html/themes\"")]), _vm._v(" "), _c('li', [_vm._v("Copy the below css and past it in the new theme file")]), _vm._v(" "), _c('li', [_vm._v("Update the \"config/mail.php\" file to use the new theme")]), _vm._v(" "), _c('li', [_vm._v("Congrats! You just created your own unique markdown theme")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Close")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Copy css")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -32195,9 +32382,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading",
     attrs: {
       "href": '#collapse' + _vm.id,
-      "role": "tab",
       "id": 'heading' + _vm.id,
       "data-toggle": "collapse",
+      "role": "tab",
       "data-parent": "#accordion",
       "aria-expanded": "false",
       "aria-controls": 'collapse' + _vm.id

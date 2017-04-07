@@ -10,7 +10,7 @@
 
                 <aside class="sidebar">
 
-                    <theme :theme="{{ $theme->id }}"></theme>
+                    <theme :theme="false"></theme>
 
                 </aside>
 
@@ -20,7 +20,7 @@
 
                 <div id="mail-demo">
 
-                    <mail :theme="{{ $theme->id }}"></mail>
+                    <mail :theme="false"></mail>
 
                 </div>
 

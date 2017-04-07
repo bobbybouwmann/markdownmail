@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +11,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('theme/{theme}', 'Api\ThemesController@show');
+Route::get('themes/preview', 'Api\ThemesController@index');
 
-Route::get('theme/{theme}/colors', 'Api\ColorsController@index');
-Route::patch('theme/{theme}/colors/{color}', 'Api\ColorsController@patch');
+Route::get('themes/colors', 'Api\ColorsController@index');
+
+Route::get('themes/css-colors', 'Api\ThemesController@cssColors');
+
+Route::get('themes/{theme}', 'Api\ThemesController@show');
+
+Route::get('themes/{theme}/css', 'Api\ThemesController@css');
+
+Route::get('themes/{theme}/colors', 'Api\ColorsController@show');
+
+Route::patch('themes/{theme}/colors/{color}', 'Api\ColorsController@patch');

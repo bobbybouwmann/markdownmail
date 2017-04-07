@@ -8,12 +8,8 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.affix {
-  overflow-y: scroll;
-  top: 72px;
-  bottom: 0;
-  width: calc(25% - 15px);
-}
+// FontAwesome
+@import "node_modules/font-awesome/scss/font-awesome";
 
 .colors {
   width: 100%;

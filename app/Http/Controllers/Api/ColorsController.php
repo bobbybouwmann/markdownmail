@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Color;
 use App\Http\Controllers\ApiController;
 use App\Theme;
 use Illuminate\Http\Request;
@@ -9,10 +10,18 @@ use Illuminate\Http\Request;
 class ColorsController extends ApiController
 {
     /**
-     * @param Theme $theme
-     * @return mixed
+     * @return \Illuminate\Support\Collection
      */
-    public function index(Theme $theme)
+    public function index()
+    {
+        return $this->generateDefaultColors();
+    }
+
+    /**
+     * @param Theme $theme
+     * @return \Illuminate\Support\Collection
+     */
+    public function show(Theme $theme)
     {
         return $theme->generateColors();
     }
@@ -36,5 +45,20 @@ class ColorsController extends ApiController
         ]);
 
         return $theme->colors;
+    }
+
+    /**
+     * Generate a collection of default colors.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function generateDefaultColors()
+    {
+        return Color::all()->map(function (Color $color) {
+            return [
+                'id' => $color->identifier,
+                'color' => $color->color,
+            ];
+        });
     }
 }

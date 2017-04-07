@@ -21,12 +21,23 @@
         },
 
         mounted() {
-            this.generatePreview();
+            if (this.theme) {
+                this.generatePreview();
+            } else {
+                this.generateDefaultPreview();
+            }
         },
 
         methods: {
             generatePreview() {
-                var url = '/api/theme/' + this.theme;
+                var url = '/api/themes/' + this.theme;
+
+                axios.get(url)
+                    .then(response => this.mail = response.data);
+            },
+
+            generateDefaultPreview() {
+                var url = '/api/themes/preview';
 
                 axios.get(url)
                     .then(response => this.mail = response.data);

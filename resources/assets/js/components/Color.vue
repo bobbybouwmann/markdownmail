@@ -2,7 +2,15 @@
 
     <div class="panel panel-default">
 
-        <div class="panel-heading" :href="'#collapse' + id" role="tab" :id="'heading' + id" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" :aria-controls="'collapse' + id">
+        <div class="panel-heading"
+             :href="'#collapse' + id"
+             :id="'heading' + id"
+             data-toggle="collapse"
+             role="tab"
+             data-parent="#accordion"
+             aria-expanded="false"
+             :aria-controls="'collapse' + id"
+        >
 
             <h4 class="panel-title">
 
@@ -26,7 +34,8 @@
 
                             <div v-for="color in row" class="color-block">
 
-                                <div class="color" v-bind:style="{ backgroundColor: color }" :data-hex="color" @click="setColor(color)">
+                                <div class="color" v-bind:style="{ backgroundColor: color }" :data-hex="color"
+                                     @click="setColor(color)">
                                     <span v-if="newColor == color">&#10004;</span>
                                 </div>
 
@@ -76,13 +85,15 @@
             setColor(color) {
                 this.newColor = color;
 
-                this.pushColor();
+                if (this.theme) {
+                    this.pushColor();
+                }
 
                 this.$emit('color_selected', this.id, this.newColor);
             },
 
             pushColor() {
-                var url = '/api/theme/' + this.theme + '/colors/' + this.id;
+                var url = '/api/themes/' + this.theme + '/colors/' + this.id;
 
                 axios.patch(url, {
                     id: this.id,
@@ -292,5 +303,6 @@
         }
 
     }
+
 
 </script>

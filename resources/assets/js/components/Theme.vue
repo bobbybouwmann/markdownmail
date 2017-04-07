@@ -2,6 +2,16 @@
 
     <div>
 
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" @click="generateCss">
+            Generate Laravel markdown theme
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" @click="generateCss">
+            Generate html
+        </button>
+
+        <hr>
+
         <div class="colors-collection">
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -16,6 +26,32 @@
 
         </div>
 
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Laravel CSS theme</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4>How to use this theme in your Laravel applications</h4>
+                        <ol>
+                            <li>Create a new themes file in "resources/views/vendor/mail/html/themes"</li>
+                            <li>Copy the below css and past it in the new theme file</li>
+                            <li>Update the "config/mail.php" file to use the new theme</li>
+                            <li>Congrats! You just created your own unique markdown theme</li>
+                        </ol>
+                        <textarea disabled="disabled" style="width: 100%; height: 400px;">{{ css }}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Copy css</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </template>
@@ -28,24 +64,64 @@
 
         data() {
             return {
-                colors: []
+                colors: [],
+                css: null
             }
         },
 
         created() {
-            this.fetchColors();
+            if (this.theme) {
+                this.fetchColors();
+            } else {
+                this.fetchDefaultColors();
+            }
+
         },
 
         methods: {
             colorSelected(id, color) {
+                this.updateColorCollection(id, color);
+
                 this.handleColorSelected(id, color);
             },
 
             fetchColors() {
-                var url = '/api/theme/' + this.theme + '/colors';
+                var url = '/api/themes/' + this.theme + '/colors';
 
                 axios.get(url)
                     .then(response => this.colors = response.data);
+            },
+
+            fetchDefaultColors() {
+                var url = '/api/themes/colors';
+
+                axios.get(url)
+                    .then(response => this.colors = response.data);
+            },
+
+            generateCss() {
+                if (this.theme) {
+                    this.fetchCssForTheme();
+                } else {
+                    this.fetchCssForColors();
+                }
+            },
+
+            fetchCssForTheme() {
+                var url = '/api/themes/' + this.theme + '/css';
+
+                axios.get(url)
+                    .then(response => this.css = response.data);
+            },
+
+            fetchCssForColors() {
+                var url = '/api/themes/css-colors';
+
+                axios.get(url, {
+                    params: {
+                        colors: this.colors
+                    }
+                }).then(response => this.css = response.data);
             },
 
             updateColorCollection(id, color) {
@@ -211,6 +287,8 @@
         }
 
     }
+
+
 
 
 </script>
