@@ -1,10 +1,5 @@
 <?php
 
-Route::get('/mail', function () {
-    return view('preview');
-});
-
-
 Route::get('login/{provider}', 'AuthController@redirectToProvider')->name('login');
 Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
 Route::post('logout', 'AuthController@logout')->name('logout');
