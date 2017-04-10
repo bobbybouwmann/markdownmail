@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         $user = User::firstOrCreate(
             ['email' => $socialUser->email],
-            ['name' => $socialUser->name, 'password' => bcrypt(str_random())]
+            ['name' => $socialUser->name]
         );
 
         auth()->login($user, true);
