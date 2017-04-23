@@ -1,0 +1,65 @@
+.action-buttons {
+  margin-bottom: 20px;
+}
+
+.browser {
+  width: 100%;
+  background-color: #F4F4F4;
+  margin: 0 auto 22px auto;
+  border-radius: 8px;
+
+  .browser-top {
+    display: flex;
+    flex-direction: row;
+    padding: 4px 15px;
+    background-color: #E3E5E9;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    > div {
+      flex-basis: 21px;
+    }
+
+    > div[class^="button-"] {
+      flex-basis: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin: 8px 9px 6px 0;
+    }
+
+    .button-close {
+      background: #EC6D6B;
+    }
+
+    .button-min {
+      background: #E7B846;
+    }
+
+    .button-full {
+      background: #57BD82;
+    }
+
+    .url {
+      flex-grow: 1;
+      border-radius: 3px;
+      margin: 4px 0;
+      padding: 0 10px;
+      background: #ffffff;
+      color: #bdbdbd;
+    }
+
+    .icon {
+      color: #344961;
+      margin: 8px -5px 0 10px;
+    }
+  }
+
+  .browser-content {
+    background-color: #d1d1d1;
+    padding: 20px;
+  }
+}
+
+#mail-demo {
+  pointer-events: none;
+}

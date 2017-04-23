@@ -2,54 +2,50 @@
 
     <div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" @click="generateCss">
-            Generate Laravel markdown theme
-        </button>
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" @click="generateCss">
-            Generate html
-        </button>
-
-        <hr>
-
         <div class="colors-collection">
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                <color v-for="color in colors"
-                       v-on:color_selected="colorSelected"
-                       :id="color.id"
-                       :theme="theme"
-                       :color="color.color"></color>
+                <div v-for="(colors, category) in categories" class="panel panel-default">
 
-            </div>
+                    <div :href="'#collapse' + category"
+                         :id="'heading' + category"
+                         :aria-controls="'collapse' + category"
+                         class="panel-heading collapsed"
+                         data-toggle="collapse"
+                         role="tab"
+                         data-parent="#accordion"
+                         aria-expanded="false">
 
-        </div>
+                        <h4 class="panel-title">
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Laravel CSS theme</h4>
+                            {{ category[0].toUpperCase() + category.substr(1) }}
+
+                        </h4>
+
                     </div>
-                    <div class="modal-body">
-                        <h4>How to use this theme in your Laravel applications</h4>
-                        <ol>
-                            <li>Create a new themes file in "resources/views/vendor/mail/html/themes"</li>
-                            <li>Copy the below css and past it in the new theme file</li>
-                            <li>Update the "config/mail.php" file to use the new theme</li>
-                            <li>Congrats! You just created your own unique markdown theme</li>
-                        </ol>
-                        <textarea disabled="disabled" style="width: 100%; height: 400px;">{{ css }}</textarea>
+
+                    <div :id="'collapse' + category"
+                         :aria-labelledby="'heading' + category"
+                         class="panel-collapse collapse"
+                         role="tabpanel">
+
+                        <div class="panel-body">
+
+                            <color v-for="color in colors"
+                                   v-on:color_selected="colorSelected"
+                                   :id="color.id"
+                                   :theme="theme"
+                                   :defaultColor="color.color"></color>
+
+                        </div>
+
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Copy css</button>
-                    </div>
+
                 </div>
+
             </div>
+
         </div>
 
     </div>
@@ -64,24 +60,16 @@
 
         data() {
             return {
-                colors: [],
-                css: null
+                categories: [],
             }
         },
 
         created() {
-            if (this.theme) {
-                this.fetchColors();
-            } else {
-                this.fetchDefaultColors();
-            }
-
+            this.fetchColors();
         },
 
         methods: {
             colorSelected(id, color) {
-                this.updateColorCollection(id, color);
-
                 this.handleColorSelected(id, color);
             },
 
@@ -89,56 +77,7 @@
                 var url = '/api/themes/' + this.theme + '/colors';
 
                 axios.get(url)
-                    .then(response => this.colors = response.data);
-            },
-
-            fetchDefaultColors() {
-                var url = '/api/themes/colors';
-
-                axios.get(url)
-                    .then(response => this.colors = response.data);
-            },
-
-            generateCss() {
-                if (this.theme) {
-                    this.fetchCssForTheme();
-                } else {
-                    this.fetchCssForColors();
-                }
-            },
-
-            fetchCssForTheme() {
-                var url = '/api/themes/' + this.theme + '/css';
-
-                axios.get(url)
-                    .then(response => this.css = response.data);
-            },
-
-            fetchCssForColors() {
-                var url = '/api/themes/css-colors';
-
-                axios.get(url, {
-                    params: {
-                        colors: this.colors
-                    }
-                }).then(response => this.css = response.data);
-            },
-
-            updateColorCollection(id, color) {
-                var index = this.colors.map(function(color) {
-                    return color.id;
-                }).indexOf(id);
-
-                var data = {
-                    id: id,
-                    color: color
-                }
-
-                if (index >= 0) {
-                    this.$set(this.colors, index, data);
-                } else {
-                    this.$set(this.colors, data);
-                }
+                    .then(response => this.categories = response.data);
             },
 
             handleColorSelected(id, color) {
@@ -209,7 +148,7 @@
                         break;
 
                     case 'linkColor':
-                        this.applyStyle('#mail-demo a:not(.button)', function (element) {
+                        this.applyStyle('#mail-demo .body a:not(.button)', function (element) {
                             element.style.color = color;
                         });
 

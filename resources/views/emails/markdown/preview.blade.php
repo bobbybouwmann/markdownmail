@@ -1,11 +1,7 @@
 @component('mail::message')
-# Introduction
+# Heading 1
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque dicta <a href="">doloremque eaque</a>, enim error laboriosam pariatur possimus tenetur veritatis voluptas.
-
-@component('mail::button', ['url' => '#', 'color' => 'blue'])
-    Button Text
-@endcomponent
+This is a paragraph filled with Lorem Ipsum and a link. Cumque dicta <a href="">doloremque eaque</a>, enim error laboriosam pariatur possimus tenetur veritatis voluptas.
 
 ## Heading 2
 
@@ -16,29 +12,37 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque dicta <a href="
     | Col 3 is      | Right-Aligned | $20      |
 @endcomponent
 
-@component('mail::button', ['url' => '#', 'color' => 'green'])
-    Button Text
-@endcomponent
-
 ### Heading 3
 
-@component('mail::panel')
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere ipsa vel veritatis? Ex, minima sunt.
+This is a paragraph filled with Lorem Ipsum and a link. Cumque dicta <a href="">doloremque eaque</a>, enim error laboriosam pariatur possimus tenetur veritatis voluptas.
+
+@component('mail::button', ['url' => '#', 'color' => 'blue'])
+    Blue button
+@endcomponent
+
+@component('mail::button', ['url' => '#', 'color' => 'green'])
+    Blue button
 @endcomponent
 
 @component('mail::button', ['url' => '#', 'color' => 'red'])
-    Button Text
+    Red button
 @endcomponent
 
+@component('mail::panel')
+    How awesome is this panel?
+@endcomponent
+
+Heading 3
+
 @component('mail::promotion')
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eos esse nesciunt unde? Aspernatur, eum?
+    Coupon code: MarkdownMail
 @endcomponent
 
 Thanks,<br>
 {{ config('app.name') }}
 
 @component('mail::subcopy')
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eos esse nesciunt unde? Aspernatur, eum?
+    This is the subcopy of the email
 @endcomponent
 
 @endcomponent

@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -14,27 +13,22 @@ require('./bootstrap');
  */
 
 Vue.component(
-    'mail',
-    require('./components/Mail.vue')
+  'mail',
+  require('./components/Mail.vue')
 );
 
 Vue.component(
-    'theme',
-    require('./components/Theme.vue')
+  'theme',
+  require('./components/Theme.vue')
 );
 
 Vue.component(
-    'color',
-    require('./components/Color.vue')
+  'color',
+  require('./components/Color.vue')
 );
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 
-    data: {
-        colors: {
-            hex: '#194d33'
-        }
-    }
-
+  data: {}
 });

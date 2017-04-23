@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ThemeRequest;
 use App\Theme;
-use Illuminate\Http\Request;
 
 class ThemesController extends Controller
 {
@@ -28,7 +28,7 @@ class ThemesController extends Controller
         return view('themes.create');
     }
 
-    public function store(Request $request)
+    public function store(ThemeRequest $request)
     {
         $theme = auth()->user()->themes()->create([
             'name' => $request->get('name'),
@@ -36,13 +36,35 @@ class ThemesController extends Controller
             'colors' => [],
         ]);
 
-        return redirect()->route('themes.edit', $theme->id);
+        return redirect()->route('themes.editor', $theme->id);
     }
 
     public function edit(Theme $theme)
     {
+        return view('themes.edit', compact('theme'));
+    }
+
+    public function update(ThemeRequest $request, Theme $theme)
+    {
+        $theme->update([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+        ]);
+
+        return redirect()->route('themes.index');
+    }
+
+    public function destroy(Theme $theme)
+    {
+        $theme->delete();
+
+        return redirect()->route('themes.index');
+    }
+
+    public function editor(Theme $theme)
+    {
         $this->authorize('update', $theme);
 
-        return view('themes.edit', compact('theme'));
+        return view('themes.editor', compact('theme'));
     }
 }

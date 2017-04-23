@@ -2,25 +2,43 @@
 
 @section('content')
 
-    <div class="container-fluid" id="app">
+    <div class="container">
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-8 col-md-offset-2">
 
-                <aside class="sidebar">
+                <div class="panel">
 
-                    <theme :theme="{{ $theme->id }}"></theme>
+                    <div class="panel-body">
 
-                </aside>
+                        <form method="POST" action="{{ route('themes.update', $theme) }}">
+                            {{ method_field('PATCH') }}
+                            {{ csrf_field() }}
 
-            </div>
+                            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                <label for="name">Theme name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Theme name"
+                                       value="{{ $theme->name }}">
+                                @if ($errors->has('name'))
+                                    <span class="help-block">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
 
-            <div class="col-md-9 content">
+                            <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                                <label for="description">Theme description</label>
+                                <textarea class="form-control" id="description" name="description"
+                                          placeholder="Theme description">{{ $theme->description }}</textarea>
+                                @if ($errors->has('name'))
+                                    <span class="help-block">{{ $errors->first('description') }}</span>
+                                @endif
+                            </div>
 
-                <div id="mail-demo">
+                            <button type="submit" class="btn btn-primary">Update theme</button>
 
-                    <mail :theme="{{ $theme->id }}"></mail>
+                        </form>
+
+                    </div>
 
                 </div>
 

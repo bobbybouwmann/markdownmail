@@ -20,6 +20,7 @@ class CreateThemesTable extends Migration
             $table->string('description');
             $table->json('colors');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,16 +12,6 @@ use Illuminate\Support\Collection;
 class ThemesController extends ApiController
 {
     /**
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        $colors = $this->generateDefaultColors()->toArray();
-
-        return (new Preview($colors))->render();
-    }
-
-    /**
      * @param Theme $theme
      * @return \Illuminate\View\View
      */
@@ -40,22 +30,6 @@ class ThemesController extends ApiController
     public function css(Theme $theme)
     {
         $colors = $theme->generateColors()->pluck('color', 'id')->toArray();
-
-        return view('emails.markdown.template', ['colors' => $colors])->render();
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     * @throws \Throwable
-     */
-    public function cssColors(Request $request)
-    {
-        $collection = new Collection($request->get('colors'));
-
-        $colors = $collection->map(function ($color) {
-            return json_decode($color);
-        })->pluck('color', 'id')->toArray();
 
         return view('emails.markdown.template', ['colors' => $colors])->render();
     }

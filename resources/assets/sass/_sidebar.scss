@@ -1,0 +1,54 @@
+.site-title {
+  background: #213343;
+  padding: 20px;
+  text-align: center;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 30px;
+      line-height: 1;
+    }
+  }
+}
+
+.sidebar {
+  padding: 20px 0;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.colors-collection {
+  .panel-group .panel + .panel {
+    margin-top: 0;
+  }
+
+  .panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    .panel-heading {
+      border-radius: 0;
+      color: #ffffff;
+      background: #213343;
+      padding: 20px;
+
+      &.collapsed {
+        background: #33495E;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: #213343;
+      }
+    }
+
+  }
+}

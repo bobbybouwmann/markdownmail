@@ -1,0 +1,47 @@
+.hero-container {
+  text-align: center;
+  background: url('../images/pattern.png');
+  color: white;
+
+  h1 {
+    text-align: left;
+    
+    span {
+      margin-top: -15px;
+
+      a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 50px;
+    margin: 40px auto 20px auto;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .btn {
+    margin: 40px auto;
+    padding: 10px 20px;
+    font-size: 24px;
+  }
+}
+
+.about-container {
+  background: white;
+  padding: 40px 0;
+
+  hr {
+    margin-bottom: 10px;
+  }
+
+  .about-block {
+
+  }
+}

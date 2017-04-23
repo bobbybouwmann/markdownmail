@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('themes/preview', 'Api\ThemesController@index');
-
-Route::get('themes/colors', 'Api\ColorsController@index');
-
-Route::get('themes/css-colors', 'Api\ThemesController@cssColors');
-
 Route::get('themes/{theme}', 'Api\ThemesController@show');
 
 Route::get('themes/{theme}/css', 'Api\ThemesController@css');

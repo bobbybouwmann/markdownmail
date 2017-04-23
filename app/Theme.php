@@ -45,6 +45,7 @@ class Theme extends Model
             return [
                 'id' => $color->identifier,
                 'color' => $customColor ?? $color->color,
+                'category' => $color->category,
             ];
         });
     }

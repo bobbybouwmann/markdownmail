@@ -1,0 +1,26 @@
+.top-menu {
+  background: #ffffff;
+  padding: 0;
+  height: 70px;
+  border: none;
+  margin-bottom: 0;
+}
+
+.nav > li > a {
+  padding: 10px 25px;
+}
+
+.navbar-nav > li:hover {
+  background: #eeeeee;
+}
+
+.navbar-right {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
