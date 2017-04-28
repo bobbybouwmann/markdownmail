@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         $user = User::firstOrCreate(
             ['email' => $socialUser->email],
-            ['name' => $socialUser->name]
+            ['name' => isset($socialUser->name) ? $socialUser->name : $socialUser->nickname]
         );
 
         auth()->login($user, true);
