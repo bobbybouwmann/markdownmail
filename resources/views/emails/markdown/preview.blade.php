@@ -21,7 +21,7 @@ This is a paragraph filled with Lorem Ipsum and a link. Cumque dicta <a href="">
 @endcomponent
 
 @component('mail::button', ['url' => '#', 'color' => 'green'])
-    Blue button
+    Green button
 @endcomponent
 
 @component('mail::button', ['url' => '#', 'color' => 'red'])
