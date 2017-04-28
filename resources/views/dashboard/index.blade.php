@@ -8,7 +8,7 @@
 
             <h1>
                 MarkdownMail
-                <span class="pull-right">
+                <span class="pull-right hidden-xs">
                     <a href="{{ route('login', 'github') }}">
                         <i class="fa fa-github"></i> Login with Github
                     </a>

@@ -12,6 +12,11 @@ body {
   min-height: 100%;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .header-wrapper, .content-wrapper {
   display: flex;
   flex-direction: row;

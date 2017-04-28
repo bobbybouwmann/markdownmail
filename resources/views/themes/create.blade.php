@@ -28,7 +28,7 @@
                                 <label for="description">Theme description</label>
                                 <textarea class="form-control" id="description" name="description"
                                           placeholder="Theme description"></textarea>
-                                @if ($errors->has('name'))
+                                @if ($errors->has('description'))
                                     <span class="help-block">{{ $errors->first('description') }}</span>
                                 @endif
                             </div>

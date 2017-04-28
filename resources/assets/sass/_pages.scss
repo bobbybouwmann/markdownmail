@@ -45,3 +45,9 @@
 
   }
 }
+
+@media(max-width: 500px) {
+  .hero-container h2 {
+    font-size: 36px;
+  }
+}
