@@ -6,10 +6,10 @@ This is a paragraph filled with Lorem Ipsum and a link. Cumque dicta <a href="">
 ## Heading 2
 
 @component('mail::table')
-    | Product       | Description                                               | Price    |
-    | ------------- |-----------------------------------------------------------| --------:|
-    | Product 1     | Lorem Ipsum                                               | $10      |
-    | Product 2     | Lorem ipsum dolor sit amet, consectetur adipisicing elit. | $20      |
+    | Product       | Description                 | Price    |
+    | ------------- |-----------------------------| --------:|
+    | Product 1     | Lorem Ipsum                 | $10      |
+    | Product 2     | Lorem ipsum dolor sit amet. | $20      |
 @endcomponent
 
 ### Heading 3
