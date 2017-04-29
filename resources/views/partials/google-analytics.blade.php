@@ -1,4 +1,4 @@
-@if (app()->environment() === 'prod')
+@if (app()->environment() === 'production')
 
     <!-- Google Analytics -->
     <script>
@@ -9,6 +9,7 @@
 
       ga('create', 'UA-43703345-8', 'auto');
       ga('send', 'pageview');
+
     </script>
 
 @endif
