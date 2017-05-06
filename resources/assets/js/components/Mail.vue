@@ -13,16 +13,32 @@
                 Generate html
             </button>
 
+            <div class="pull-right responsive-buttons">
+
+                <div class="btn-group" role="group">
+
+                    <button v-for="item in modes"
+                            type="button"
+                            :class="[mode == item ? 'btn btn-default' : 'btn']" @click="mode = item"
+                    >
+                        <i :class="['fa fa-' + item]" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="browser">
+        <div class="browser" :style="mailWidth">
 
             <div class="browser-top">
 
                 <div class="button-close"></div>
                 <div class="button-min"></div>
                 <div class="button-full"></div>
-                <div class="url">https://markdownmail.com/themes/{{ this.name }}</div>
+                <div class="url"></div>
+
                 <div><i class="fa fa-paper-plane icon"></i></div>
 
             </div>
@@ -105,12 +121,36 @@
         data() {
             return {
                 css: null,
-                mail: null
+                mail: null,
+                modes: ['mobile', 'tablet', 'desktop'],
+                mode: 'desktop',
             }
         },
 
         mounted() {
             this.generatePreview();
+        },
+
+        computed: {
+            mailWidth() {
+                let width = '100%';
+                let innerWidth = 570;
+
+                if (this.mode == 'tablet') {
+                    width = '768px';
+                }
+
+                if (this.mode == 'mobile') {
+                    width = '375px';
+                    innerWidth = 335;
+                }
+
+                $('#mail-demo .inner-body, #mail-demo .footer').width(innerWidth);
+
+                return {
+                    'width': width,
+                }
+            },
         },
 
         methods: {
