@@ -211,7 +211,7 @@ img {
     -webkit-text-size-adjust: none;
 }
 
-.button-blue {
+.button-blue, .button-primary {
     background-color: {{ $colors['buttonBlueBackground'] }};
     border-top: 10px solid {{ $colors['buttonBlueBackground'] }};
     border-right: 18px solid {{ $colors['buttonBlueBackground'] }};
@@ -219,7 +219,7 @@ img {
     border-left: 18px solid {{ $colors['buttonBlueBackground'] }};
 }
 
-.button-green {
+.button-green, .button-success {
     background-color: {{ $colors['buttonGreenBackground'] }};
     border-top: 10px solid {{ $colors['buttonGreenBackground'] }};
     border-right: 18px solid {{ $colors['buttonGreenBackground'] }};
@@ -227,7 +227,7 @@ img {
     border-left: 18px solid {{ $colors['buttonGreenBackground'] }};
 }
 
-.button-red {
+.button-red, .button-error {
     background-color: {{ $colors['buttonRedBackground'] }};
     border-top: 10px solid {{ $colors['buttonRedBackground'] }};
     border-right: 18px solid {{ $colors['buttonRedBackground'] }};
