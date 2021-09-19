@@ -1,0 +1,41 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #2A94D6;
+  position: relative;
+  min-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.header-wrapper, .content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  min-height: 100%;
+  height: 100%;
+
+  .menu-wrapper, .main-content-wrapper {
+    flex-grow: 1;
+  }
+
+  .header-title, .main-sidebar {
+    flex-basis: 400px;
+    background: #33495E;
+  }
+}
+
+.main-content {
+  padding: 20px;
+}

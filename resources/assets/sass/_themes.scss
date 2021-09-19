@@ -1,0 +1,16 @@
+.themes {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+
+  .theme {
+    display: flex;
+    flex-basis: 33%;
+    padding: 20px;
+
+    .panel {
+      width: 100%;
+      margin-bottom: 0;
+    }
+  }
+}
