@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->stateless()->redirect();
     }
 
     /**
@@ -27,7 +27,7 @@ class AuthController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $socialUser = Socialite::driver('github')->user();
+        $socialUser = Socialite::driver('github')->stateless()->user();
 
         $user = User::where('github_id', $socialUser->getId())
             ->orWhere('email', $socialUser->getEmail())
