@@ -72,7 +72,7 @@
                             <li>Update the "config/mail.php" file to use the new theme</li>
                             <li>Congrats! You just created your own unique markdown theme</li>
                         </ol>
-                        <textarea id="css-textarea" disabled="disabled" style="width: 100%; height: 400px;">{{ css }}</textarea>
+                        <textarea id="css-textarea" readonly style="width: 100%; height: 400px;">{{ css }}</textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -98,7 +98,7 @@
                             <li>Update the text, buttons, etc. to your preferences</li>
                             <li>Congrats! You just created a good looking email</li>
                         </ol>
-                        <textarea id="html-textarea" disabled="disabled" style="width: 100%; height: 400px;">{{ mail }}</textarea>
+                        <textarea id="html-textarea" readonly style="width: 100%; height: 400px;">{{ mail }}</textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
