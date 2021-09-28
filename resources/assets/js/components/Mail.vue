@@ -75,8 +75,13 @@
                         <textarea id="css-textarea" readonly style="width: 100%; height: 400px;">{{ css }}</textarea>
                     </div>
                     <div class="modal-footer">
+                      <div v-if="copySucceeded" class="pull-left">
+                        <h4><strong class="text-success">Copied to clipboard!</strong></h4>
+                      </div>
+                      <div class="pull-right">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" @click="copyElement('css-textarea')">Copy CSS</button>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -101,8 +106,13 @@
                         <textarea id="html-textarea" readonly style="width: 100%; height: 400px;">{{ mail }}</textarea>
                     </div>
                     <div class="modal-footer">
+                      <div v-if="copySucceeded" class="pull-left">
+                        <h4><strong class="text-success">Copied to clipboard!</strong></h4>
+                      </div>
+                      <div class="pull-right">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" @click="copyElement('html-textarea')">Copy HTML</button>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -122,6 +132,7 @@
             return {
                 css: null,
                 mail: null,
+                copySucceeded: false,
                 modes: ['mobile', 'tablet', 'desktop'],
                 mode: 'desktop',
             }
@@ -169,28 +180,44 @@
             },
 
             copyElement(elementId) {
-                console.log(elementId);
-                var element = document.getElementById(elementId);
-                console.log()
-                var selection = window.getSelection();
-                var range = document.createRange();
+              var element = document.getElementById(elementId);
 
-                range.selectNodeContents(element);
-                selection.removeAllRanges();
-                selection.addRange(range);
+              // Attempt 'execCommand' method, though deprecated.
+              // Fallback to the future-proof method, albeit non-ubiquitous.
+              try {
+                element.focus();
+                element.select();
 
-                document.execCommand('copy');
+                this.copySucceeded = document.execCommand('copy');
 
-                var succeeded = false;
-
-                try {
-                    succeeded = document.execCommand('copy')
-                } catch (err) {
-                    succeeded = false
+                if (this.copySucceeded) {
+                  setTimeout(() => this.copySucceeded = false, 3000);
+                } else {
+                  this.copyElementFuture(element);
                 }
-            }
-        }
+              } catch (e) {
+                this.copyElementFuture(element);
+              }
+            },
 
+            copyElementFuture: function (element) {
+              if (navigator.clipboard) {
+                try {
+                  navigator.permissions.query({'name': 'clipboard-write'}).then(function (result) {
+                    if (['granted', 'prompt'].includes(result.state)) {
+                      navigator.clipboard.writeText(element.value)
+                          .then(() => this.copySucceeded = true,
+                              () => this.copySucceeded = false)
+                          .then(() => setTimeout(() => this.copySucceeded = false, 3000))
+                          .catch(() => this.copySucceeded = false)
+                    }
+                  }.bind(this));
+                } catch (e) {
+                  // No markdown for you :(
+                }
+              }
+            }
+          }
     }
 
 
