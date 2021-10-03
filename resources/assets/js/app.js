@@ -1,3 +1,5 @@
+import vue from 'vue';
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -12,22 +14,22 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component(
+vue.component(
   'mail',
-  require('./components/Mail.vue')
+  require('./components/Mail.vue').default
 );
 
-Vue.component(
+vue.component(
   'theme',
-  require('./components/Theme.vue')
+  require('./components/Theme.vue').default
 );
 
-Vue.component(
+vue.component(
   'color',
-  require('./components/Color.vue')
+  require('./components/Color.vue').default
 );
 
-const app = new Vue({
+const app = new vue({
   el: '#app',
 
   data: {}

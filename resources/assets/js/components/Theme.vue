@@ -33,6 +33,7 @@
                         <div class="panel-body">
 
                             <color v-for="color in colors"
+                                   :key="color.id"
                                    v-on:color_selected="colorSelected"
                                    :id="color.id"
                                    :theme="theme"
